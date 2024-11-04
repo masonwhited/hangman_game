@@ -1,8 +1,8 @@
 ## Overview
 
-**Project Title**:
+**Project Title**: Hangman Game
 
-**Project Description**:
+**Project Description**: a Terminal Hangman game using the Rust Programming language.
 
 **Project Goals**:
 
