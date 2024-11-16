@@ -1,4 +1,6 @@
 // Import necessary modules for input/output and random number generation
+use rand::seq::SliceRandom;
+use rand::thread_rng;
 use std::io::{self, Write};
 
 // Main function to run the Hangman game
@@ -6,7 +8,10 @@ fn main() {
     // List of words to choose from for the game
     let words = vec!["rustacean", "programming", "hangman", "computer"];
     // Randomly select a secret word from the list
-    let secret_word = words;
+    let secret_word = words
+        .choose(&mut thread_rng())
+        .expect("Word list is empty")
+        .to_string();
 
     // Vector to keep track of guessed letters
     let mut guessed_letters: Vec<char> = Vec::new();

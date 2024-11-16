@@ -34,7 +34,7 @@ fn read_guess() -> char {
 
 fn main() {
     // The word to guess in the game
-    let secret_word = "rustacean";
+    let secret_word = "wistful";
     let mut guessed_letters = HashSet::new(); // A set to keep track of guessed letters
     let mut remaining_attempts = 8; // Number of attempts the player has before losing
 
