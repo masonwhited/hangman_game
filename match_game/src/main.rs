@@ -38,12 +38,32 @@ fn main() {
          _______
         |/      |
         |      (_)
-        |      \|/
+        |      \|
         |       
         |      
         |
        _|___
         "#,
+        r#"
+        _______
+       |/      |
+       |      (_)
+       |      \|/
+       |       
+       |      
+       |
+      _|___
+       "#,
+        r#"
+       _______
+      |/      |
+      |      (_)
+      |      \|/
+      |       |
+      |      /
+      |
+     _|___
+      "#,
         r#"
          _______
         |/      |
@@ -59,7 +79,7 @@ fn main() {
     // Vector to keep track of guessed letters
     let mut guessed_letters: Vec<char> = Vec::new();
     // Number of remaining attempts the player has
-    let mut remaining_attempts = 3;
+    let mut remaining_attempts = 5;
     let mut current = graphic[graphic.len() - remaining_attempts - 1];
 
     // Welcome message
