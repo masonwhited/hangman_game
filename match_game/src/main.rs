@@ -6,7 +6,7 @@ use std::io::{self, Write};
 // Main function to run the Hangman game
 fn main() {
     // List of words to choose from for the game
-    let words = vec!["rustacean", "programming", "hangman", "computer"];
+    let words = vec!["wistful", "eclipse", "czar", "bananza"];
     // Randomly select a secret word from the list
     let secret_word = words
         .choose(&mut thread_rng())
