@@ -12,11 +12,55 @@ fn main() {
         .choose(&mut thread_rng())
         .expect("Word list is empty")
         .to_string();
+    // List of graphics to iterate through as the game progresses
+    let graphic = vec![
+        r#"
+         _______
+        |/      |
+        |      
+        |      
+        |       
+        |      
+        |
+       _|___
+        "#,
+        r#"
+         _______
+        |/      |
+        |      (_)
+        |      
+        |       
+        |      
+        |
+       _|___
+        "#,
+        r#"
+         _______
+        |/      |
+        |      (_)
+        |      \|/
+        |       
+        |      
+        |
+       _|___
+        "#,
+        r#"
+         _______
+        |/      |
+        |      (_)
+        |      \|/
+        |       |
+        |      / \
+        |
+       _|___
+        "#,
+    ];
 
     // Vector to keep track of guessed letters
     let mut guessed_letters: Vec<char> = Vec::new();
     // Number of remaining attempts the player has
-    let mut remaining_attempts = 8;
+    let mut remaining_attempts = 3;
+    let mut current = graphic[graphic.len() - remaining_attempts - 1];
 
     // Welcome message
     println!("Welcome to Hangman!");
@@ -24,10 +68,14 @@ fn main() {
     // Main game loop
     loop {
         // Display the current state of the word
-        display_word(&secret_word, &guessed_letters);
+        display_word(&secret_word, &guessed_letters, &current);
 
         // Check the game state (win, lose, or continue)
-        match game_state(&secret_word, &guessed_letters, remaining_attempts) {
+        match game_state(
+            &secret_word,
+            &guessed_letters,
+            remaining_attempts.try_into().unwrap(),
+        ) {
             GameState::Win => {
                 // Player has guessed the word correctly
                 println!(
@@ -57,6 +105,8 @@ fn main() {
                     // Incorrect guess
                     guessed_letters.push(guess); // Add the letter to guessed letters
                     remaining_attempts -= 1; // Decrease the remaining attempts
+                                             // Update the current graphic based on remaining attempts
+                    current = graphic[graphic.len() - remaining_attempts - 1];
                     println!(
                         "Wrong guess! You have {} attempts remaining.",
                         remaining_attempts
@@ -68,13 +118,14 @@ fn main() {
 }
 
 // Function to display the current state of the word with guessed letters
-fn display_word(secret_word: &str, guessed_letters: &Vec<char>) {
+fn display_word(secret_word: &str, guessed_letters: &Vec<char>, current: &&str) {
     // Create a string representation of the word with underscores for unguessed letters
     let display: String = secret_word
         .chars()
         .map(|c| if guessed_letters.contains(&c) { c } else { '_' }) // Replace unguessed letters with '_'
         .collect();
     // Print the current display of the word
+    println!("\n{}", current);
     println!("Word: {}", display);
 }
 
